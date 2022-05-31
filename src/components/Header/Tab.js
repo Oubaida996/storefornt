@@ -2,6 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, Tab, Typography, Box } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
+import Product from '../Products/Products'
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -19,15 +20,13 @@ function TabPanel(props) {
             {...other}
         >
             {value === index && (
-                <Box sx={{ p: 3 }}>
+                <Box sx={{ p: 4 }}>
                     {products.map((item, index) => {
-                        if (item.catId === children) {
-                            return <div key={index}>
-                                <Typography>{item.proName}</Typography>
-                            </div>
+                        if (item.categoryAssociation === children) {
+                            return (
+                                <Product item={item} key={index} />
+                            )
                         }
-
-
                     })}
                 </Box>
             )}
@@ -35,11 +34,7 @@ function TabPanel(props) {
     );
 }
 
-TabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.number.isRequired,
-    value: PropTypes.number.isRequired,
-};
+
 
 function a11yProps(index) {
     return {
@@ -66,17 +61,24 @@ export default function BasicTabs() {
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                    <Tab label={categories[0].catName} {...a11yProps(0)} />
-                    <Tab label={categories[1].catName} {...a11yProps(1)} />
+                    {
+                        categories.map((cat, index) => {
+                            return (
+                                <Tab label={cat.normalizedName} {...a11yProps(index)} />
+                            );
+                        })
+                    }
                 </Tabs>
             </Box>
-            <TabPanel value={value} index={0}>
-                {categories[0].id}
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                {categories[1].id}
-            </TabPanel>
-
+            {
+                categories.map((cat, index) => {
+                    return (
+                        <TabPanel value={value} index={index}>
+                            {cat.normalizedName}
+                        </TabPanel>
+                    );
+                })
+            }
         </Box>
     );
 }
