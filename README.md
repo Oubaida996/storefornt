@@ -9,7 +9,8 @@ Creating an e-Commerce storefront using React with Redux, coupled with your live
 [netlify]()  
 
 
-
+# uml
+![uml](./assets/lab%2036%20uml.jpg)
 
 
 

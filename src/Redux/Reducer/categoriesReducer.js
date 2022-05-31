@@ -1,13 +1,16 @@
 const initalState = {
     categories: [
         {
-            id: 1,
-            catName: 'Electronics'
+            normalizedName: 'Electronics',
+            dispalyName: 'Electronics',
+            description: 'this category contains the electronics'
         },
         {
-            id: 2,
-            catName: 'Food'
+            normalizedName: 'Food',
+            dispalyName: 'Food',
+            description: 'this category contains the food'
         }
+
     ]
 };
 
