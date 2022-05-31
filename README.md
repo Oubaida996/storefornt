@@ -2,7 +2,7 @@
 Creating an e-Commerce storefront using React with Redux, coupled with your live API server
 
 # PR phase  1
-[PR]()  
+[PR](https://github.com/Oubaida996/storefornt/pull/3)  
 
 
 # netlify  
