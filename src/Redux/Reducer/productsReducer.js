@@ -1,4 +1,4 @@
-initalState = {
+const initalState = {
     products: [
         {
             id: 1,
@@ -24,8 +24,10 @@ initalState = {
 };
 
 // 2-create reducer to set state and change it 
-export const categoriesReducer = (state = initalState, action) => {
-    if (action.type === 'VIEW') {
-        return { categories: state.categories }
+export const productsReducer = (state = initalState, action) => {
+    if (action.type === 'PROVIEW') {
+        return { products: state.products }
     }
+    return state;
+
 }
