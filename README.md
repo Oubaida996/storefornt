@@ -6,7 +6,7 @@ Creating an e-Commerce storefront using React with Redux, coupled with your live
 
 
 # netlify  
-[netlify]()  
+[netlify](https://6295b93067999b06265130dc--vocal-granita-bbfd45.netlify.app/)  
 
 
 
