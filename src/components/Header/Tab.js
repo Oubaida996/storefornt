@@ -1,15 +1,14 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import { Tabs, Tab, Typography, Box } from '@mui/material';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+
+import { Tabs, Tab, Box } from '@mui/material';
+import { useSelector } from 'react-redux';
 import Product from '../Products/Products'
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     // console.log({ value });
     const products = useSelector(state => state.Products.products);
-    // console.log({ products });
-
+    console.log({ products });
 
     return (
         <div
@@ -50,7 +49,7 @@ export default function BasicTabs() {
 
     // console.log({ categories });
     //5- change data in reduce by dispatch
-    const dispathchData = useDispatch();
+    // const dispathchData = useDispatch();
 
 
     const handleChange = (event, newValue) => {
@@ -64,7 +63,7 @@ export default function BasicTabs() {
                     {
                         categories.map((cat, index) => {
                             return (
-                                <Tab label={cat.normalizedName} {...a11yProps(index)} />
+                                <Tab label={cat.normalizedName} {...a11yProps(index)} key={index} />
                             );
                         })
                     }
@@ -73,7 +72,7 @@ export default function BasicTabs() {
             {
                 categories.map((cat, index) => {
                     return (
-                        <TabPanel value={value} index={index}>
+                        <TabPanel value={value} index={index} key={index}>
                             {cat.normalizedName}
                         </TabPanel>
                     );

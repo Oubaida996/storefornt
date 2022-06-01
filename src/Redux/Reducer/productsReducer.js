@@ -46,6 +46,19 @@ export const productsReducer = (state = initalState, action) => {
     if (action.type === 'PROVIEW') {
         return { products: state.products }
     }
+    if (action.type === 'STOCKCOUNTER') {
+        // console.log(action.type);
+        // console.log(action.payload);
+        let stock = state.products.map((item) => {
+            if (item.displayName === action.payload) {
+                item.inventoryCount = item.inventoryCount - 1;
+            }
+            return item;
+        });
+        // console.log(stock);
+        // let newState = [...state.products, stock];
+        return { products: stock };
+    }
     return state;
 
 }

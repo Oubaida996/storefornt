@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@mui/material';
 
 
 export default function MediaCard(props) {
-    const { displayName, description, price, inetoryCount, image } = props.item
+    const dispatch = useDispatch();
+    const { displayName, description, price, inventoryCount, image } = props.item
     return (
         <Card style={{ margin: '10px' }} sx={{ maxWidth: 345 }}>
             <CardMedia
@@ -23,9 +25,23 @@ export default function MediaCard(props) {
                 <Typography variant="body2" color="text.secondary">
                     {description}
                 </Typography>
+                <Typography variant="h5" >
+                    stock :{inventoryCount <= 0 ? 0 : inventoryCount}
+                </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small">add to cart</Button>
+                {
+                    props.cart === 'cart' ? <Button size="small" onClick={() => {
+                        dispatch({ type: "STOCKCOUNTER", payload: displayName });
+                        dispatch({ type: "removeProuctFromCart", payload: props.item });
+                    }}>delete from cart</Button>
+                        :
+                        inventoryCount <= 0 ? <Button></Button> : <Button size="small" onClick={() => {
+                            dispatch({ type: "STOCKCOUNTER", payload: displayName });
+                            dispatch({ type: "addProductToCart", payload: props.item });
+                        }}>add to cart</Button>
+                }
+
                 <Button size="small">Learn More</Button>
             </CardActions>
         </Card>
