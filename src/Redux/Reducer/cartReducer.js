@@ -7,23 +7,26 @@ const initalState = {
 
 export const cartReducer = (state = initalState, action) => {
     if (action.type === "addProductToCart") {
-        console.log(action.payload);
         const cart = [...state.cartProducts, action.payload];
         const counter = state.counter + 1;
+        console.log(cart);
         return { cartProducts: cart, counter }
 
     }
     if (action.type === "removeProuctFromCart") {
-        let counterItem = state.cartProducts.map((item) => {
+        let counterItem = 0;
+        state.cartProducts.map((item) => {
             if (item.displayName === action.payload.displayName) {
-                return item;
-            }
-        }
+                console.log(action.payload.displayName);
+                counterItem++;
 
-        );
+            }
+        });
+
+        console.log('counterItem', counterItem);
         const cartFilter = state.cartProducts.filter((item) => item.displayName !== action.payload.displayName);
-        console.log('remove', cartFilter);
-        const counter = state.counter - counterItem.length;
+        console.log('cartFilter', cartFilter);
+        const counter = state.counter - counterItem;
         return { cartProducts: cartFilter, counter }
 
     }
