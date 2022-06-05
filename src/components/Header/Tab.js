@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { getCategories } from '../../Redux/Reducer/categoriesReducer'
+import { getProducts } from '../../Redux/Reducer/productsReducer'
 
 import { Tabs, Tab, Box } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Product from '../Products/Products'
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     // console.log({ value });
+    // 5 - change data in reduce by dispatch
+    const dispathchData = useDispatch();
+    useEffect(() => {
+        dispathchData(getProducts());
+    }, []);
     const products = useSelector(state => state.Products.products);
     console.log({ products });
 
@@ -44,13 +51,20 @@ function a11yProps(index) {
 
 export default function BasicTabs() {
     const [value, setValue] = React.useState(0);
+    const [categories, setCategories] = useState([]);
+
+    // 5 - change data in reduce by dispatch
+    const dispathchData = useDispatch();
+    useEffect(() => {
+        dispathchData(getCategories());
+    }, []);
     //4- access data from store reducer by useSelector
-    const categories = useSelector(state => state.Categories.categories);
+    const dataCategories = useSelector(state => state.Categories.categories);
+    console.log({ dataCategories });
 
-    // console.log({ categories });
-    //5- change data in reduce by dispatch
-    // const dispathchData = useDispatch();
-
+    useEffect(() => {
+        setCategories(dataCategories);
+    }, [dataCategories])
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
