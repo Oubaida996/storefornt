@@ -1,52 +1,53 @@
 
+import axios from "axios";
 
 const initalState = {
     products: [
-        {
-            categoryAssociation: 'Electronics',
-            displayName: 'phones',
-            description: 'smart phone with 10 cameras',
-            price: '15$',
-            inventoryCount: 12,
-            image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGhvbmV8ZW58MHx8MHx8&w=1000&q=80'
+        // {
+        //     categoryAssociation: "Electronics",
+        //     displayName: "phones",
+        //     description: "smart phone with 10 cameras",
+        //     price: "15$",
+        //     inventoryCount: 12,
+        //     image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGhvbmV8ZW58MHx8MHx8&w=1000&q=80"
 
-        },
-        {
-            categoryAssociation: 'Electronics',
-            displayName: 'laptops',
-            description: 'laptops with 10 cameras',
-            price: '15$',
-            inventoryCount: 10,
-            image: 'https://m.media-amazon.com/images/I/81KoSSAwH2L._SL1500_.jpg'
+        // },
+        // {
+        //     categoryAssociation: "Electronics",
+        //     displayName: "laptops",
+        //     description: "laptops with 10 cameras",
+        //     price: "15$",
+        //     inventoryCount: 10,
+        //     image: "https://m.media-amazon.com/images/I/81KoSSAwH2L._SL1500_.jpg"
 
-        },
-        {
-            categoryAssociation: 'Food',
-            displayName: 'orange',
-            description: 'orange for juice',
-            price: '15$',
-            inventoryCount: 10,
-            image: 'https://media.istockphoto.com/photos/orange-picture-id185284489?k=20&m=185284489&s=612x612&w=0&h=LLY2os0YTG2uAzpBKpQZOAC4DGiXBt1jJrltErTJTKI='
+        // },
+        // {
+        //     categoryAssociation: "Electronics",
+        //     displayName: "laptops",
+        //     description: "laptops with 10 cameras",
+        //     price: "15$",
+        //     inventoryCount: 10,
+        //     image: "https://m.media-amazon.com/images/I/81KoSSAwH2L._SL1500_.jpg"
 
-        },
-        {
-            categoryAssociation: 'Food',
-            displayName: 'strawberry',
-            description: 'strawberry for eating',
-            price: '15$',
-            inventoryCount: 10,
-            image: 'https://img.lovepik.com/background/20211029/medium/lovepik-strawberry-mobile-phone-wallpaper-background-image_400297857.jpg'
+        // },
+        // {
+        //     categoryAssociation: "Food",
+        //     displayName: "strawberry",
+        //     description: "strawberry for eating",
+        //     price: "15$",
+        //     inventoryCount: 10,
+        //     image: "https://img.lovepik.com/background/20211029/medium/lovepik-strawberry-mobile-phone-wallpaper-background-image_400297857.jpg"
 
-        },
+        // },
     ]
 };
 
 // 2-create reducer to set state and change it 
 export const productsReducer = (state = initalState, action) => {
-    if (action.type === 'PROVIEW') {
-        return { products: state.products }
+    if (action.type === "PROVIEW") {
+        return { products: action.data }
     }
-    if (action.type === 'STOCKCOUNTER') {
+    if (action.type === "STOCKCOUNTER") {
         // console.log(action.type);
         // console.log(action.payload);
         let stock = state.products.map((item) => {
@@ -61,4 +62,14 @@ export const productsReducer = (state = initalState, action) => {
     }
     return state;
 
+}
+
+
+let apiProduct = 'https://app-auth-obieda.herokuapp.com/api/v1/products'
+export const getProducts = () => {
+    return async (dispatch) => {
+        const res = await axios.get(apiProduct);
+        console.log(res.data);
+        dispatch({ type: 'PROVIEW', data: res.data });
+    }
 }
