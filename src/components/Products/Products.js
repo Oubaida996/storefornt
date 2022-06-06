@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@mui/material';
-
+import { Card, CardActions, CardContent, CardMedia, Button, IconButton, Typography } from '@mui/material';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 export default function MediaCard(props) {
     const dispatch = useDispatch();
@@ -28,6 +28,9 @@ export default function MediaCard(props) {
                 <Typography variant="h5" >
                     stock :{inventoryCount <= 0 ? 0 : inventoryCount}
                 </Typography>
+                <IconButton aria-label="delete">
+                    <DeleteIcon />
+                </IconButton>
             </CardContent>
             <CardActions>
                 {

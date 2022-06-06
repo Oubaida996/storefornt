@@ -7,7 +7,7 @@ const initalState = {
 
 export const cartReducer = (state = initalState, action) => {
     if (action.type === "addProductToCart") {
-        const cart = [...state.cartProducts, action.payload];
+        const cart = [...state.cartProducts, action.payload];//payload == item
         const counter = state.counter + 1;
         console.log(cart);
         return { cartProducts: cart, counter }
