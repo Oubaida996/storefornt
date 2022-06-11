@@ -9,10 +9,12 @@ Creating an e-Commerce storefront using React with Redux, coupled with your live
 
 # PR phase  3
 [PR](https://github.com/Oubaida996/storefornt/pull/7)  
+# PR phase  4
+[PR](https://github.com/Oubaida996/storefornt/pull/8)  
 
 
 # netlify  
-[netlify](https://deploy-preview-7--vocal-granita-bbfd45.netlify.app/)  
+[netlify](https://deploy-preview-8--vocal-granita-bbfd45.netlify.app/)  
 
 
 # uml
