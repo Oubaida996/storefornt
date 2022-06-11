@@ -1,11 +1,16 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { Card, CardActions, CardContent, CardMedia, Button, IconButton, Typography } from '@mui/material';
-import DeleteIcon from '@material-ui/icons/Delete';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Card, CardActions, CardContent, CardMedia, Button, Typography, SvgIcon } from '@mui/material';
+import AddRemove from './AddRemove';
+import { updataProducts } from '../../Redux/Reducer/productsReducer';
+
+
+
 
 export default function MediaCard(props) {
     const dispatch = useDispatch();
-    const { displayName, description, price, inventoryCount, image } = props.item
+
+    const { displayName, description, price, inventoryCount, image, id, noOfItem } = props.item
     return (
         <Card style={{ margin: '10px' }} sx={{ maxWidth: 345 }}>
             <CardMedia
@@ -28,20 +33,24 @@ export default function MediaCard(props) {
                 <Typography variant="h5" >
                     stock :{inventoryCount <= 0 ? 0 : inventoryCount}
                 </Typography>
-                <IconButton aria-label="delete">
-                    <DeleteIcon />
-                </IconButton>
+
+                {props.cart === 'cart' ? <AddRemove item={props.item} /> : <Button></Button>}
+
+
+
+
             </CardContent>
             <CardActions>
                 {
                     props.cart === 'cart' ? <Button size="small" onClick={() => {
-                        dispatch({ type: "STOCKCOUNTER", payload: displayName });
+                        dispatch(updataProducts(id, inventoryCount, 'ICN'));
                         dispatch({ type: "removeProuctFromCart", payload: props.item });
                     }}>delete from cart</Button>
                         :
                         inventoryCount <= 0 ? <Button></Button> : <Button size="small" onClick={() => {
-                            dispatch({ type: "STOCKCOUNTER", payload: displayName });
                             dispatch({ type: "addProductToCart", payload: props.item });
+                            dispatch(updataProducts(id, inventoryCount, 'DEC'));
+
                         }}>add to cart</Button>
                 }
 
