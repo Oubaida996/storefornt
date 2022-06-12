@@ -4,7 +4,7 @@ import { getProducts } from '../../Redux/Reducer/productsReducer'
 
 import { Tabs, Tab, Box } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
-import Product from '../Products/Products'
+import Product from '../Products/Products';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;

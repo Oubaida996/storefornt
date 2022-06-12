@@ -14,11 +14,7 @@ const initalState = {
 
     ]
 };
-// {
-// "normalizedName": "Electronics",
-// "dispalyName": "Electronics",
-// "description": "this category contains the electronics"
-// }
+
 // 2-create reducer to set state and change it 
 export const categoriesReducer = (state = initalState, action) => {
     if (action.type === 'CATVIEW') {

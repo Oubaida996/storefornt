@@ -50,14 +50,17 @@ export const productsReducer = (state = initalState, action) => {
     if (action.type === "STOCKCOUNTER") {
         // console.log(action.type);
         // console.log(action.payload);
+        // console.log(state.products);
         let stock = state.products.map((item) => {
-            if (item.displayName === action.payload) {
-                item.inventoryCount = item.inventoryCount - 1;
+            // console.log(item);
+            if (item.id === action.payload.id) {
+                // console.log(item);
+                item.inventoryCount = action.payload.inventoryCount;
             }
             return item;
-        });
-        // console.log(stock);
-        // let newState = [...state.products, stock];
+        })
+        // console.log(stock, "ssss");
+        // let stock = [...state.products, action.payload];
         return { products: stock };
     }
     return state;
@@ -67,9 +70,30 @@ export const productsReducer = (state = initalState, action) => {
 
 let apiProduct = 'https://app-auth-obieda.herokuapp.com/api/v1/products'
 export const getProducts = () => {
+    // let id = 2;
+    // console.log(apiProduct + `/${id}`);
     return async (dispatch) => {
         const res = await axios.get(apiProduct);
         console.log(res.data);
         dispatch({ type: 'PROVIEW', data: res.data });
+    }
+}
+
+export const updataProducts = (id, inventoryCount, type) => {
+    let inventory = 0;
+    console.log(type);
+    if (type === 'DEC') {
+        inventory = --inventoryCount;
+    } else {
+        inventory = ++inventoryCount;
+    }
+
+    return async (dispatch) => {
+        const res = await axios.put(apiProduct + `/${id}`, {
+            inventoryCount: inventory
+        });
+        console.log(apiProduct + `/${id}`)
+        console.log(res.data);
+        dispatch({ type: 'STOCKCOUNTER', payload: res.data });
     }
 }
